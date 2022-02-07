@@ -1,25 +1,26 @@
-import { Button, Grid, Typography } from "@mui/material";
-import type { GetStaticProps, NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
+import { Grid, Typography } from "@mui/material";
+import type { GetStaticProps } from "next";
 import Layout from "../components/Layout";
 import { data } from "../data";
 import { ProductType } from "../interfaces/dataType";
 import GridItem from "../components/products/GridItem";
 
-const Home = ({ products }: { products: ProductType[] }) => {
+function Home({ products }: { products: ProductType[] }) {
   return (
-    <Layout>
-      <div>
-        <Typography variant="h3">Products</Typography>
-        <Grid container spacing={3}>
-          {products.map((item) => {
-            return <GridItem key={item.name} products={item}></GridItem>;
-          })}
-        </Grid>
-      </div>
-    </Layout>
+    <div>
+      <Typography variant="h3" gutterBottom>
+        Products
+      </Typography>
+      <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        {products.map((item) => {
+          return <GridItem key={item.name} products={item}></GridItem>;
+        })}
+      </Grid>
+    </div>
   );
+}
+Home.getLayout = function getLayout(page: typeof Home) {
+  return <Layout>{page}</Layout>;
 };
 
 export const getStaticProps: GetStaticProps = () => {

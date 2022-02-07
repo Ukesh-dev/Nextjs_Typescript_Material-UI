@@ -1,12 +1,20 @@
 import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   navbar: {
     backgroundColor: "#203040",
     "& a": {
-      color: "#fff",
-      marginLeft: 10,
+      // color: theme.palette.primary.main,
+      marginLeft: ".3rem",
     },
+  },
+  navbarContaniner: {
+    padding: 0,
+  },
+  navbarButton: {
+    display: "flex",
+    alignItems: "center",
+    paddingInline: ".5rem",
   },
   brand: {
     fontWeight: "bold",
@@ -29,6 +37,6 @@ const useStyles = makeStyles({
     // width: "100%",
     objectFit: "cover",
   },
-});
+}));
 
 export default useStyles;

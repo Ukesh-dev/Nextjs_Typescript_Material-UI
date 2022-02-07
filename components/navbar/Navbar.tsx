@@ -1,36 +1,66 @@
-import { AppBar, Typography, Toolbar } from "@mui/material";
+import {
+  AppBar,
+  Button,
+  Typography,
+  Toolbar,
+  Box,
+  Container,
+} from "@mui/material";
+import { ButtonGroup } from "./NavbarStyles";
+import LoginIcon from "@mui/icons-material/Login";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AbcTwoToneIcon from "@mui/icons-material/AbcTwoTone";
 
 import Link from "next/link";
 import useStyles from "../../utils/styles";
-const Navbar = ({
-  navbar,
-  navFunc,
-}: {
-  navbar: string;
-  navFunc: { navbar: string };
-}) => {
-  const classes = useStyles();
+// import { Button } from "./NavbarStyles";
+const Navbar = () => {
   return (
-    <AppBar position="static" className={navFunc.navbar}>
-      <Toolbar>
-        <Link href="/">
-          <a>
-            <Typography className={classes.brand}>Amazona</Typography>
-          </a>
-        </Link>
-        <div>
-          <Link href="/cart">
+    <AppBar position="static" sx={{ backgroundColor: "#102030" }}>
+      <Container
+        sx={{ backgroundColor: "transparent", padding: { md: "0px" } }}
+      >
+        <Toolbar
+          sx={{
+            width: "100%",
+            backgrondColor: "green",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <Link href="/">
             <a>
-              <AbcTwoToneIcon />
-              Cart
+              <Typography
+                sx={{
+                  fontSize: "2rem",
+                  fontWeight: "bold",
+                  letterSpacing: "0.1rem",
+                }}
+              >
+                Amazona
+              </Typography>
             </a>
           </Link>
-          <Link href="/login">
-            <a>Login</a>
-          </Link>
-        </div>
-      </Toolbar>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <ButtonGroup
+              sx={{ color: "#fff", fontSize: "1rem", textTransform: "none" }}
+              startIcon={<ShoppingCartOutlinedIcon />}
+            >
+              <Link href="/cart">
+                <a>Cart</a>
+              </Link>
+            </ButtonGroup>
+            <ButtonGroup
+              sx={{ color: "#fff", fontSize: "1rem", textTransform: "none" }}
+              startIcon={<LoginIcon />}
+            >
+              <Link href="/cart">
+                <a>Log In</a>
+              </Link>
+            </ButtonGroup>
+          </Box>
+        </Toolbar>
+      </Container>
     </AppBar>
   );
 };

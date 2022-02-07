@@ -3,16 +3,16 @@ import Head from "next/head";
 import { Container } from "@mui/material";
 import useStyles from "../utils/styles";
 
-const Layout = ({ children }: { children: JSX.Element }) => {
-  const classes = useStyles(); //! Passing as Props
-  const { navbar } = useStyles(); //! Passing as Object
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  // const classes = useStyles(); //! Passing as Props
+  // const { navbar } = useStyles(); //! Passing as Object
   return (
     <>
       <Head>
         <title>Next Amazon</title>
       </Head>
-      <Navbar navbar={navbar} navFunc={classes}></Navbar>
-      <Container className={classes.main}>{children}</Container>
+      <Navbar></Navbar>
+      <Container>{children}</Container>
     </>
   );
 };

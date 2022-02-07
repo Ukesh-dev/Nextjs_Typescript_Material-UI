@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Card,
   CardActionArea,
@@ -8,31 +9,44 @@ import {
   Typography,
   CardActions,
 } from "@mui/material";
-import React from "react";
+import styled from "@emotion/styled";
 import { ProductType } from "../../interfaces/dataType";
-import useStyles from "../../utils/styles";
+// import useStyles from "../../utils/styles";
+const ButtonStyled = styled(Button)`
+  &:hover {
+    background-color: #7e6e6e;
+  }
+`;
 
 const GridItem = ({ products }: { products: ProductType }) => {
-  const classes = useStyles();
+  // const classes = useStyles();
   return (
-    <Grid item md={3} xs={12} sm={6}>
+    <Grid
+      item
+      md={3}
+      // className={classes.navbar}
+    >
       <Card variant="outlined">
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            image={products.image}
-            title={products.name}
-            className={classes.images}
-          ></CardMedia>
-          <CardContent>
-            <Typography>{products.name}</Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Typography variant="subtitle1">{products.price}</Typography>
-          <Button size="large" className={classes.button}>
+        <Link href={`/product/${products.slug}`}>
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              image={products.image}
+              title={products.name}
+            ></CardMedia>
+            <CardContent>
+              <Typography>{products.name}</Typography>
+            </CardContent>
+          </CardActionArea>
+        </Link>
+        <CardActions sx={{ justifyContent: "space-between" }}>
+          <Typography variant="subtitle1">${products.price}</Typography>
+          <ButtonStyled
+            size="medium"
+            sx={{ color: "#fff", backgroundColor: "#102030" }}
+          >
             Add to Cart
-          </Button>
+          </ButtonStyled>
         </CardActions>
       </Card>
     </Grid>
