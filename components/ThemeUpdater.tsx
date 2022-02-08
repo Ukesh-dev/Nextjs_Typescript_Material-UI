@@ -1,10 +1,7 @@
 import { FC, useEffect, useState } from "react";
-import { Button, MenuItem, Select, Typography } from "@mui/material";
 import { Switch } from "@mui/material";
 import { css } from "@emotion/react";
 import { useTheme } from "next-themes";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useGlobalContext } from "../context";
 
 const ThemeUpdater: FC<{}> = () => {
@@ -12,23 +9,20 @@ const ThemeUpdater: FC<{}> = () => {
     state: { darkmode },
     dispatch,
   } = useGlobalContext();
-  const { theme, resolvedTheme, setTheme } = useTheme();
-  useEffect(() => {
-    if (resolvedTheme === "dark") {
-      dispatch({ type: "DARKMODE_ON" });
-    }
-  }, []);
+
+  //   When mounted on client, now we can show the UI
+  useEffect(() => setMounted(true), []);
+  const [mounted, setMounted] = useState(false);
+  const { setTheme } = useTheme();
   const handleChange = () => {
     setTheme(darkmode ? "light" : "dark");
     dispatch({ type: darkmode ? "DARKMODE_OFF" : "DARKMODE_ON" });
   };
-  console.log(resolvedTheme);
-  console.log(theme);
-  const [mounted, setMounted] = useState(false);
-
-  //   When mounted on client, now we can show the UI
-  useEffect(() => setMounted(true), []);
-
+  useEffect(() => {
+    if (window.matchMedia("(prefers-color-shceme:dark")) {
+      dispatch({ type: "DARKMODE_ON" });
+    }
+  }, []);
   if (!mounted)
     return (
       <div

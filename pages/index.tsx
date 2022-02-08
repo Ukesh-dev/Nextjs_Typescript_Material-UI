@@ -4,7 +4,16 @@ import Layout from "../components/Layout";
 import { data } from "../data";
 import { ProductType } from "../interfaces/dataType";
 import GridItem from "../components/products/GridItem";
+import { css } from "@emotion/react";
 import ThemeUpdater from "../components/ThemeUpdater";
+// import styled from "@emotion/styled";
+import { styled } from "@mui/material";
+// import { theme } from "../theme";
+const GridStyled = styled(Grid)(({ theme }) => ({
+  [theme.breakpoints.between("xs", "sm")]: {
+    padding: "2rem",
+  },
+}));
 
 function Home({ products }: { products: ProductType[] }) {
   console.log(products);
@@ -13,11 +22,15 @@ function Home({ products }: { products: ProductType[] }) {
       <Typography variant="h3" gutterBottom>
         Products
       </Typography>
-      <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <GridStyled
+        container
+        rowSpacing={3}
+        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+      >
         {products.map((item) => {
           return <GridItem key={item.name} products={item}></GridItem>;
         })}
-      </Grid>
+      </GridStyled>
     </div>
   );
 }

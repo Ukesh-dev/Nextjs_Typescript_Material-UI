@@ -23,6 +23,8 @@ const GridItem = ({ products }: { products: ProductType }) => {
   return (
     <Grid
       item
+      xs={12}
+      sm={4}
       md={3}
       // className={classes.navbar}
     >

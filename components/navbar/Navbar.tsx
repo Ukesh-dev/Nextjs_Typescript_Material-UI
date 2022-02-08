@@ -6,11 +6,27 @@ import {
   Container,
   Button,
 } from "@mui/material";
-import styled from "@emotion/styled";
+// import styled from "@emotion/styled";
 import { ButtonGroup } from "./NavbarStyles";
 import LoginIcon from "@mui/icons-material/Login";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { css } from "@emotion/react";
+import { styled } from "@mui/material";
+// import Typography from '@mui/material/Typography';
+import { red, green, blue } from "@mui/material/colors";
+
+const Root = styled("div")(({ theme }) => ({
+  padding: theme.spacing(1),
+  [theme.breakpoints.down("md")]: {
+    backgroundColor: red[500],
+  },
+  [theme.breakpoints.up("md")]: {
+    backgroundColor: blue[500],
+  },
+  [theme.breakpoints.up("lg")]: {
+    backgroundColor: green[500],
+  },
+}));
 
 // const appBarr = css`
 //   background-color: var(--foreground);

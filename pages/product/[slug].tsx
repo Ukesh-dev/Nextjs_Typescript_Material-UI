@@ -5,8 +5,6 @@ import { useRouter } from "next/router";
 import { data } from "../../data";
 import Head from "next/head";
 import styled from "@emotion/styled";
-// import Layout from "../../components/Layout";
-// import NewLayout from "../../components/NewLayout";
 
 const ProductSection = styled.div`
   margin-block: 0.5rem;
@@ -30,14 +28,13 @@ export default function ProductScreen() {
           <meta name="description" content={product.description}></meta>
         )}
       </Head>
-
       <ProductSection>
         <ProductHead>
           <Link href="/">
             <Typography
               component="a"
-              variant="h1"
-              color="primary"
+              variant="h6"
+              color="secondary"
               sx={{ "&:hover": { cursor: "pointer" } }}
             >
               Back to products
