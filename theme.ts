@@ -31,7 +31,7 @@ export const theme = createTheme({
 export const getDesignTokens = (mode: PaletteMode) => ({
   typography: {
     h1: {
-      fontSize: "6rem",
+      fontSize: "1.4rem",
       fontWeight: 600,
       marginBlock: ".6rem 0",
     },

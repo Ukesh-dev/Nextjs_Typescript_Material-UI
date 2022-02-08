@@ -18,14 +18,9 @@ const ThemeUpdater: FC<{}> = () => {
     return (
       <div
         css={css`
-          background-color: hotpink;
-          &:hover {
-            color: red;
-          }
+          min-height: 160px;
         `}
-      >
-        This has a hotpink background.
-      </div>
+      ></div>
     );
 
   return (
