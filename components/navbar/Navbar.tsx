@@ -12,11 +12,11 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AbcTwoToneIcon from "@mui/icons-material/AbcTwoTone";
 
 import Link from "next/link";
-import useStyles from "../../utils/styles";
+// import useStyles from "../../utils/styles";
 // import { Button } from "./NavbarStyles";
 const Navbar = () => {
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#102030" }}>
+    <AppBar position="static" sx={{ bgcolor: "primary.main" }}>
       <Container
         sx={{ backgroundColor: "transparent", padding: { md: "0px" } }}
       >
@@ -35,10 +35,12 @@ const Navbar = () => {
                   fontSize: "2rem",
                   fontWeight: "bold",
                   letterSpacing: "0.1rem",
+                  color: "#fff",
                 }}
               >
                 Amazona
               </Typography>
+              <Typography variant="h1">A header</Typography>
             </a>
           </Link>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
