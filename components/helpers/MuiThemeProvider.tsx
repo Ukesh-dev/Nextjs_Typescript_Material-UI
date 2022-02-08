@@ -3,7 +3,7 @@ import { createTheme, GlobalStyles } from "@mui/material";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { globalStyles } from "../../theme";
 import React, { FC, useEffect } from "react";
-import { grey } from "@mui/material/colors";
+import { grey, red } from "@mui/material/colors";
 
 const MUIThemeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { resolvedTheme } = useTheme();
@@ -23,7 +23,7 @@ const MUIThemeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
             ? {
                 // palette values for light mode
                 primary: {
-                  main: "#bada55",
+                  main: red[800],
                 },
                 // divider: amber[200],
                 text: {
@@ -34,7 +34,7 @@ const MUIThemeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
             : {
                 // palette values for dark mode
                 primary: {
-                  main: "#000",
+                  main: "#bada55",
                 },
                 // divider: deepOrange[700],
                 background: {
@@ -43,7 +43,7 @@ const MUIThemeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
                   // paper: deepOrange[900],
                 },
                 text: {
-                  primary: "#000",
+                  primary: red[500],
                   secondary: grey[500],
                 },
               }),

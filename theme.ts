@@ -58,7 +58,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
       : {
           // palette values for dark mode
           primary: {
-            main: "#bada55",
+            main: "#ccccc",
           },
           // divider: deepOrange[700],
           background: {
@@ -77,6 +77,7 @@ export const globalStyles = css`
     body {
       background-color: #bada55;
       color: #121212;
+      transition: background 0.1s ease;
     }
   }
   [data-theme="dark"] {

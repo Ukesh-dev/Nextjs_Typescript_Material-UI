@@ -8,7 +8,7 @@ import Link from "next/link";
 // import { Button } from "./NavbarStyles";
 const Navbar = () => {
   return (
-    <AppBar position="static" sx={{ bgcolor: "primary.main" }}>
+    <AppBar position="static">
       <Container
         sx={{ backgroundColor: "transparent", padding: { md: "0px" } }}
       >
