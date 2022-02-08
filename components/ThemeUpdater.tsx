@@ -29,14 +29,14 @@ const ThemeUpdater: FC<{}> = () => {
   //   When mounted on client, now we can show the UI
   useEffect(() => setMounted(true), []);
 
-  // if (!mounted)
-  //   return (
-  //     <div
-  //       css={css`
-  //         min-height: 160px;
-  //       `}
-  //     ></div>
-  //   );
+  if (!mounted)
+    return (
+      <div
+        css={css`
+          min-height: 160px;
+        `}
+      ></div>
+    );
 
   return (
     // <div
