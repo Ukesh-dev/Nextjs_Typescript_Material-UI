@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Button, MenuItem, Box, Select, Typography } from "@mui/material";
+import { Button, MenuItem, Select, Typography } from "@mui/material";
 import { css } from "@emotion/react";
 import { useTheme } from "next-themes";
 import LightModeIcon from "@mui/icons-material/LightMode";

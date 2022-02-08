@@ -1,23 +1,23 @@
-import * as React from "react";
-import { useTheme } from "next-themes";
+// import * as React from "react";
+// import { useTheme } from "next-themes";
 import { ReactElement, ReactNode } from "react";
 import type { AppProps } from "next/app";
 import { ThemeProvider as PreferredTheme } from "next-themes";
-import { CacheProvider, css, EmotionCache } from "@emotion/react";
-import {
-  ThemeProvider,
-  CssBaseline,
-  createTheme,
-  GlobalStyles,
-} from "@mui/material";
-import { getDesignTokens, theme } from "../theme";
+import { CacheProvider, EmotionCache } from "@emotion/react";
+// import {
+//   ThemeProvider,
+//   CssBaseline,
+//   createTheme,
+//   GlobalStyles,
+// } from "@mui/material";
+// import { getDesignTokens, theme } from "../theme";
 
 import createEmotionCache from "../utils/createEmotionCache";
 // import lightThemeOptions from '../styles/theme/lightThemeOptions';
 import "../styles/globals.css";
 import Layout from "../components/Layout";
 import { NextPage } from "next";
-import { AppProvider, useGlobalContext } from "../context";
+import { AppProvider } from "../context";
 import MUIThemeProvider from "../components/helpers/MuiThemeProvider";
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;

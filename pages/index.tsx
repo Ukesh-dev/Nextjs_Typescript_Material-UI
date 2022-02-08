@@ -1,12 +1,13 @@
-import { Grid, Typography } from "@mui/material";
+// import { Grid, Typography } from "@mui/material";
 import type { GetStaticProps } from "next";
 import Layout from "../components/Layout";
 import { data } from "../data";
 import { ProductType } from "../interfaces/dataType";
-import GridItem from "../components/products/GridItem";
+// import GridItem from "../components/products/GridItem";
 import ThemeUpdater from "../components/ThemeUpdater";
 
 function Home({ products }: { products: ProductType[] }) {
+  console.log(products);
   return (
     // <div>
     //   <Typography variant="h3" gutterBottom>

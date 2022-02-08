@@ -3,8 +3,8 @@ import { createTheme, GlobalStyles } from "@mui/material";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 // import { darkTheme, globalStyles, lightTheme } from "../../theme";
 import { globalStyles } from "../../theme";
-import React, { FC, useEffect, useState } from "react";
-import { grey } from "@mui/material/colors";
+import React, { FC, useEffect } from "react";
+// import { grey } from "@mui/material/colors";
 
 const MUIThemeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { resolvedTheme } = useTheme();

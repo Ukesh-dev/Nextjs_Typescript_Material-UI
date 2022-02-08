@@ -1,15 +1,7 @@
-import {
-  AppBar,
-  Button,
-  Typography,
-  Toolbar,
-  Box,
-  Container,
-} from "@mui/material";
+import { AppBar, Typography, Toolbar, Box, Container } from "@mui/material";
 import { ButtonGroup } from "./NavbarStyles";
 import LoginIcon from "@mui/icons-material/Login";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import AbcTwoToneIcon from "@mui/icons-material/AbcTwoTone";
 
 import Link from "next/link";
 // import useStyles from "../../utils/styles";

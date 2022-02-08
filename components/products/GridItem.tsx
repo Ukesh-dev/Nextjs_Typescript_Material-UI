@@ -27,7 +27,7 @@ const GridItem = ({ products }: { products: ProductType }) => {
       // className={classes.navbar}
     >
       <Card variant="outlined">
-        <Link href={`/product/${products.slug}`}>
+        <Link href={`/product/${products.slug}`} passHref>
           <CardActionArea>
             <CardMedia
               component="img"
