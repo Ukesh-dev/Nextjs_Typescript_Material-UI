@@ -47,7 +47,11 @@ const Navbar = () => {
   return (
     <AppBar
       position="static"
-      sx={{ bgcolor: "primary.main", backgroundImage: "none" }}
+      sx={{
+        bgcolor: "primary.main",
+        maxHeight: "68px",
+        backgroundImage: "none",
+      }}
     >
       <Container sx={{ padding: { md: "0px" } }}>
         <Toolbar

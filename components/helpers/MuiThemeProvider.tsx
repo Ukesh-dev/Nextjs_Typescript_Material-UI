@@ -1,7 +1,7 @@
 import { useTheme } from "next-themes";
 import { createTheme, GlobalStyles } from "@mui/material";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { globalStyles } from "../../theme";
+import { globalStyles } from "./theme";
 import React, { FC, useEffect } from "react";
 import { yellow } from "@mui/material/colors";
 
