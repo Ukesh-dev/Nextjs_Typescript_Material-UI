@@ -24,13 +24,12 @@ const ThemeUpdater: FC<{}> = () => {
     }
   }, []);
   if (!mounted)
-    return (
-      <div
-        css={css`
-          min-height: 160px;
-        `}
-      ></div>
-    );
+    return null;
+    // <div
+    //   css={css`
+    //     min-height: 160px;
+    //   `}
+    // ></div>
 
   return (
     // <div
