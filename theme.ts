@@ -74,16 +74,19 @@ export const getDesignTokens = (mode: PaletteMode) => ({
 });
 export const globalStyles = css`
   :root {
-    body {
-      background-color: #bada55;
-      color: #121212;
-      transition: background 0.1s ease;
-    }
+    --background: #fff;
+    --foreground: black;
+    --navbg: #102030;
   }
   [data-theme="dark"] {
-    body {
-      background-color: #121212;
-      color: #fff;
+    --background: #000;
+    --navbg: #102030;
+    --foreground: blackbody {
+
     }
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
   }
 `;

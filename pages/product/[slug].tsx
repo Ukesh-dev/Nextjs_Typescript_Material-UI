@@ -33,11 +33,16 @@ export default function ProductScreen() {
 
       <ProductSection>
         <ProductHead>
-          <Typography variant="h2" sx={{ color: "blue" }}>
-            <Link href="/">
-              <a>Back to products</a>
-            </Link>
-          </Typography>
+          <Link href="/">
+            <Typography
+              component="a"
+              variant="h1"
+              color="primary"
+              sx={{ "&:hover": { cursor: "pointer" } }}
+            >
+              Back to products
+            </Typography>
+          </Link>
         </ProductHead>
         <Grid container spacing={2}>
           <Grid item md={5} xs={12}>

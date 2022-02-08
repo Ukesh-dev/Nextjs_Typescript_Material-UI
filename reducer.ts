@@ -4,9 +4,7 @@ export type initialStateType = {
 export const initialState = {
   darkmode: false,
 };
-export type ActionType =
-  | { type: "DARKMODE_ON"; text: string }
-  | { type: "DARKMODE_OFF"; id: number };
+export type ActionType = { type: "DARKMODE_ON" } | { type: "DARKMODE_OFF" };
 
 export const reducer = (state: initialStateType, action: ActionType) => {
   switch (action.type) {

@@ -10,10 +10,6 @@ function Home({ products }: { products: ProductType[] }) {
   console.log(products);
   return (
     <div>
-      <ThemeUpdater />
-      <Button variant="contained" color="primary">
-        New Button
-      </Button>
       <Typography variant="h3" gutterBottom>
         Products
       </Typography>
