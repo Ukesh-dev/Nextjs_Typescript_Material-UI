@@ -1,9 +1,5 @@
 import mongoose, { Connection } from 'mongoose';
 
-interface ConnectionType {
-    isConnected?: any;
-}
-const connection: ConnectionType = {};
 
 async function connect() {
     if (connection.isConnected) {
