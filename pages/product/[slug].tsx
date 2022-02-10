@@ -7,6 +7,12 @@ import Head from "next/head";
 // import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { styled } from "@mui/system";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
+import {
+  Character,
+  CharacterType,
+  CharacterWithPrice,
+} from "../../interfaces/dataType";
 
 const ProductSection = styled("div")(({ theme }) => ({
   marginBlock: "0.5rem",
@@ -17,20 +23,22 @@ const ProductHead = styled("div")`
   margin-block: 1rem;
 `;
 
-export default function ProductScreen() {
-  const router = useRouter();
-  const { slug } = router.query;
-  const product = data.products.find((a) => a.slug == slug);
-  if (!product) {
-    return <div>Product not Fount</div>;
-  }
+export default function ProductScreen({
+  product,
+}: {
+  product: CharacterWithPrice;
+}) {
+  // const router = useRouter();
+  // const { slug } = router.query;
+  // const product = data.products.find((a) => a.slug == slug);
+  // if (!product) {
+  //   return <div>Product not Found</div>;
+  // }
   return (
     <>
       <Head>
         <title>{product.name}</title>
-        {product.description && (
-          <meta name="description" content={product.description}></meta>
-        )}
+        {product && <meta name="description" content={product.name}></meta>}
       </Head>
       <ProductSection>
         <ProductHead>
@@ -64,22 +72,20 @@ export default function ProductScreen() {
                 </Typography>
               </ListItem>
               <ListItem>
-                <Typography variant="h6">
-                  Category: {product.category}
-                </Typography>
-              </ListItem>
-              <ListItem>
-                <Typography variant="h6">Brand : {product.brand}</Typography>
+                <Typography variant="h6">Category: {product.gender}</Typography>
               </ListItem>
               <ListItem>
                 <Typography variant="h6">
-                  Rating: {product.rating} stars ({product.numReviews} reviews)
+                  Brand : {product.origin.name}
                 </Typography>
               </ListItem>
               <ListItem>
                 <Typography variant="h6">
-                  Description:{product.description}
+                  Rating: {product.species} stars ({product.price} reviews)
                 </Typography>
+              </ListItem>
+              <ListItem>
+                <Typography variant="h6">Description:{product.name}</Typography>
               </ListItem>
             </List>
           </Grid>
@@ -103,7 +109,7 @@ export default function ProductScreen() {
                     </Grid>
                     <Grid item xs={5}>
                       <Typography>
-                        {product.countInStock > 0 ? "In Stock" : "Out of stock"}
+                        {product.id > 0 ? "In Stock" : "Out of stock"}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -130,4 +136,54 @@ export default function ProductScreen() {
 
 // ProductScreen.getLayout = (page: typeof ProductScreen) => {
 //   return <NewLayout>{page}</NewLayout>;
+// };
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await fetch("https://rickandmortyapi.com/api/character");
+  const { results }: CharacterType = await res.json();
+  // console.log(results);
+
+  return {
+    paths: results.map((character) => {
+      return { params: { slug: String(character.id) } };
+    }),
+    fallback: true,
+  };
+};
+
+export const getStaticProps = async ({
+  params,
+}: {
+  params: { slug: string };
+}) => {
+  const res = await fetch(
+    `https://rickandmortyapi.com/api/character/${params.slug}`
+  );
+
+  const data = await res.json();
+  const newData = { ...data, price: data.id * 100 };
+
+  return {
+    props: {
+      product: newData,
+    },
+    revalidate: 3600,
+  };
+};
+
+// export const getServerSideProps = async ({
+//   params,
+// }: {
+//   params: { slug: string };
+// }) => {
+//   const { slug } = params;
+//   const res = await fetch(`https://rickandmortyapi.com/api/character/${slug}`);
+//   const data = await res.json();
+
+//   const newData = { ...data, price: data.id * 100 };
+//   return {
+//     props: {
+//       product: newData,
+//     },
+//   };
 // };

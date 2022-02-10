@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { ProductType } from "../../interfaces/dataType";
+import { CharacterWithPrice, ProductType } from "../../interfaces/dataType";
 import Image from "next/image";
 // import useStyles from "../../utils/styles";
 const ButtonStyled = styled(Button)`
@@ -20,7 +20,7 @@ const ButtonStyled = styled(Button)`
   } */
 `;
 
-const GridItem = ({ products }: { products: ProductType }) => {
+const GridItem = ({ products }: { products: CharacterWithPrice }) => {
   // const classes = useStyles();
   return (
     <Grid
@@ -38,7 +38,7 @@ const GridItem = ({ products }: { products: ProductType }) => {
         `}
         aria-label="options"
       >
-        <Link href={`/product/${products.slug}`} passHref>
+        <Link href={`/product/${products.id}`} passHref>
           <CardActionArea>
             <div
               css={css`
