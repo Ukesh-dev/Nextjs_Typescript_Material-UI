@@ -9,15 +9,20 @@ import {
   Typography,
   CardActions,
 } from "@mui/material";
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { CharacterWithPrice, ProductType } from "../../interfaces/dataType";
 import Image from "next/image";
+import imageLoader from "../../imageLoader";
 // import useStyles from "../../utils/styles";
 const ButtonStyled = styled(Button)`
   /* &:hover {
     background-color: #7e6e6e;
   } */
+`;
+const ImageWrapper = styled.div`
+  position: relative;
+  width: "100%";
+  aspect-ratio: 1;
 `;
 
 const GridItem = ({ products }: { products: CharacterWithPrice }) => {
@@ -31,22 +36,17 @@ const GridItem = ({ products }: { products: CharacterWithPrice }) => {
       lg={3}
       // className={classes.navbar}
     >
-      <Card
-        variant="outlined"
-        css={css`
-          background-color: var(--navbar-bg);
-        `}
-        aria-label="options"
-      >
+      <Card variant="outlined" aria-label="options">
         <Link href={`/product/${products.id}`} passHref>
           <CardActionArea>
-            <div
+            {/* <div   //! Need to fix using pragma orElse it shows [object object] error 
               css={css`
                 position: relative;
                 width: "100%";
                 aspect-ratio: 1;
               `}
-            >
+            > */}
+            <ImageWrapper>
               {/* <a> */}
               {/* <CardMedia
               component="img"
@@ -54,13 +54,16 @@ const GridItem = ({ products }: { products: CharacterWithPrice }) => {
               src={products.image}
             > */}
               <Image
+                loader={imageLoader}
+                unoptimized
                 layout="fill"
                 alt={products.name}
                 src={products.image}
                 objectFit="cover"
               ></Image>
               {/* </CardMedia> */}
-            </div>
+            </ImageWrapper>
+            {/* </div> */}
             <CardContent>
               <Typography>{products.name}</Typography>
             </CardContent>

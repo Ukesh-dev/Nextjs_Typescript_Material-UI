@@ -13,6 +13,7 @@ import {
   CharacterType,
   CharacterWithPrice,
 } from "../../interfaces/dataType";
+import imageLoader from "../../imageLoader";
 
 const ProductSection = styled("div")(({ theme }) => ({
   marginBlock: "0.5rem",
@@ -57,6 +58,8 @@ export default function ProductScreen({
         <Grid container spacing={2}>
           <Grid item md={5} xs={12}>
             <Image
+              loader={imageLoader}
+              unoptimized
               src={product.image}
               alt={product.name}
               width="400px"
@@ -147,7 +150,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: results.map((character) => {
       return { params: { slug: String(character.id) } };
     }),
-    fallback: true,
+    fallback: "blocking",
   };
 };
 
