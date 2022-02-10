@@ -4,8 +4,10 @@ export type initialStateType = {
 export const initialState = {
   darkmode: false,
 };
-export type ActionType = { type: "DARKMODE_ON" } | { type: "DARKMODE_OFF" };
-
+export type ActionType =
+  | { type: "DARKMODE_ON" }
+  | { type: "DARKMODE_OFF" }
+  | { type: "TEST" };
 export const reducer = (state: initialStateType, action: ActionType) => {
   switch (action.type) {
     case "DARKMODE_ON":
@@ -13,6 +15,9 @@ export const reducer = (state: initialStateType, action: ActionType) => {
 
     case "DARKMODE_OFF":
       return { ...state, darkmode: false };
+    case "TEST":
+      console.log("Hello From reducer");
+      return state;
     default:
       return state;
   }

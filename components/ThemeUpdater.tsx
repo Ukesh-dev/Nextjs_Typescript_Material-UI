@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { Switch } from "@mui/material";
 import { css } from "@emotion/react";
 import { useTheme } from "next-themes";
@@ -13,23 +13,42 @@ const ThemeUpdater: FC<{}> = () => {
   //   When mounted on client, now we can show the UI
   useEffect(() => setMounted(true), []);
   const [mounted, setMounted] = useState(false);
-  const { setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const handleChange = () => {
     setTheme(darkmode ? "light" : "dark");
-    dispatch({ type: darkmode ? "DARKMODE_OFF" : "DARKMODE_ON" });
+    // dispatch({ type: darkmode ? "DARKMODE_OFF" : "DARKMODE_ON" });
   };
+  // const loadCurrentTheme = useCallback(() => {
+  //   if (
+  //     window.matchMedia("(prefers-color-shceme:dark") ||
+  //     resolvedTheme === "dark"
+  //   ) {
+  //     dispatch({ type: "DARKMODE_ON" });
+  //   }
+  //   if (resolvedTheme === "light") {
+  //     dispatch({ type: "DARKMODE_OFF" });
+  //   }
+  // }, [resolvedTheme]);
   useEffect(() => {
-    if (window.matchMedia("(prefers-color-shceme:dark")) {
+    // () => loadCurrentTheme();
+    console.log("in the useEffect");
+    if (
+      window.matchMedia("(prefers-color-shceme:dark") ||
+      resolvedTheme === "dark"
+    ) {
       dispatch({ type: "DARKMODE_ON" });
     }
-  }, []);
-  if (!mounted)
-    return null;
-    // <div
-    //   css={css`
-    //     min-height: 160px;
-    //   `}
-    // ></div>
+    if (resolvedTheme === "light") {
+      dispatch({ type: "DARKMODE_OFF" });
+    }
+  }, [resolvedTheme, dispatch]);
+  if (!mounted) return null;
+  // <div
+  //   css={css`
+  //     min-height: 160px;
+  //   `}
+  // ></div>
+  // );
 
   return (
     // <div

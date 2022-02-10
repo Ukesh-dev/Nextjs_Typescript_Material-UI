@@ -1,15 +1,16 @@
 import { useTheme } from "next-themes";
-import { createTheme, GlobalStyles } from "@mui/material";
+import { createTheme, GlobalStyles, responsiveFontSizes } from "@mui/material";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { globalStyles } from "./theme";
 import React, { FC, useEffect } from "react";
-import { yellow } from "@mui/material/colors";
+import { blue, grey, yellow } from "@mui/material/colors";
+import { breakpoints } from "@mui/system";
 
 const MUIThemeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { resolvedTheme } = useTheme();
 
   const [mode, setMode] = React.useState<"light" | "dark">("light");
-  const theme = React.useMemo(
+  let theme = React.useMemo(
     () =>
       createTheme({
         breakpoints: {
@@ -37,10 +38,10 @@ const MUIThemeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
                 secondary: {
                   main: yellow[500],
                 },
-                // text: {
-                //   primary: grey[900],
-                //   secondary: grey[800],
-                // },
+                text: {
+                  primary: grey[900],
+                  secondary: grey[800],
+                },
               }
             : {
                 // palette values for dark mode
@@ -50,14 +51,19 @@ const MUIThemeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
                 secondary: {
                   main: yellow[500],
                 },
-                text: {
-                  primary: "#fff",
-                },
               }),
         },
       }),
     [mode]
   );
+
+  // theme.typography.h3 = {
+  //   fotnSize: "1.2rem",
+  //   [theme.breakpoints.up('md')]:{
+  //     fontSize: "3rem",
+  //   }
+  // }
+  theme = responsiveFontSizes(theme);
 
   useEffect(() => {
     resolvedTheme === "light" ? setMode("light") : setMode("dark");

@@ -4,12 +4,16 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { data } from "../../data";
 import Head from "next/head";
-import styled from "@emotion/styled";
+// import styled from "@emotion/styled";
+import { css } from "@emotion/react";
+import { styled } from "@mui/system";
 
-const ProductSection = styled.div`
-  margin-block: 0.5rem;
-`;
-const ProductHead = styled.div`
+const ProductSection = styled("div")(({ theme }) => ({
+  marginBlock: "0.5rem",
+  [theme.breakpoints.up("md")]: {},
+}));
+// const Search = styled()
+const ProductHead = styled("div")`
   margin-block: 1rem;
 `;
 
@@ -30,12 +34,13 @@ export default function ProductScreen() {
       </Head>
       <ProductSection>
         <ProductHead>
-          <Link href="/">
+          <Link href="/" passHref>
             <Typography
               component="a"
               variant="h6"
-              color="secondary"
-              sx={{ "&:hover": { cursor: "pointer" } }}
+              sx={{
+                "&:hover": { cursor: "pointer" },
+              }}
             >
               Back to products
             </Typography>
@@ -46,10 +51,9 @@ export default function ProductScreen() {
             <Image
               src={product.image}
               alt={product.name}
-              width={640}
-              height={640}
-              layout="responsive"
-              priority={true}
+              width="400px"
+              height="450px"
+              priority
             />
           </Grid>
           <Grid item md={4} xs={12}>
@@ -105,7 +109,7 @@ export default function ProductScreen() {
                   </Grid>
                 </ListItem>
                 <ListItem>
-                  <Button fullWidth variant="contained" color="primary">
+                  <Button fullWidth variant="contained" color="secondary">
                     Add to Cart
                   </Button>
                 </ListItem>
