@@ -1,21 +1,20 @@
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
-import { Switch } from "@mui/material";
-import { css } from "@emotion/react";
-import { useTheme } from "next-themes";
-import { useGlobalContext } from "../context";
+import { FC, useEffect, useState } from 'react';
+import { Switch } from '@mui/material';
+import { useTheme } from 'next-themes';
+import { useGlobalContext } from '../context';
 
-const ThemeUpdater: FC<{}> = () => {
+const ThemeUpdater: FC = () => {
   const {
     state: { darkmode },
     dispatch,
   } = useGlobalContext();
 
   //   When mounted on client, now we can show the UI
+  const [mounted, setMounted] = useState<boolean>(false);
   useEffect(() => setMounted(true), []);
-  const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
   const handleChange = () => {
-    setTheme(darkmode ? "light" : "dark");
+    setTheme(darkmode ? 'light' : 'dark');
     // dispatch({ type: darkmode ? "DARKMODE_OFF" : "DARKMODE_ON" });
   };
   // const loadCurrentTheme = useCallback(() => {
@@ -31,15 +30,15 @@ const ThemeUpdater: FC<{}> = () => {
   // }, [resolvedTheme]);
   useEffect(() => {
     // () => loadCurrentTheme();
-    console.log("in the useEffect");
+    console.log('in the useEffect');
     if (
-      window.matchMedia("(prefers-color-shceme:dark") ||
-      resolvedTheme === "dark"
+      window.matchMedia('(prefers-color-shceme:dark') ||
+      resolvedTheme === 'dark'
     ) {
-      dispatch({ type: "DARKMODE_ON" });
+      dispatch({ type: 'DARKMODE_ON' });
     }
-    if (resolvedTheme === "light") {
-      dispatch({ type: "DARKMODE_OFF" });
+    if (resolvedTheme === 'light') {
+      dispatch({ type: 'DARKMODE_OFF' });
     }
   }, [resolvedTheme, dispatch]);
   if (!mounted) return null;
@@ -87,13 +86,7 @@ const ThemeUpdater: FC<{}> = () => {
     // </div>
 
     // );
-    <>
-      <Switch
-        checked={darkmode}
-        onChange={handleChange}
-        color="secondary"
-      ></Switch>
-    </>
+    <Switch checked={darkmode} onChange={handleChange} color="secondary" />
   );
 };
 

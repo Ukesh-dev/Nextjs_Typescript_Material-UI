@@ -1,26 +1,27 @@
-import { Typography, Grid, List, ListItem, Card, Button } from "@mui/material";
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { data } from "../../data";
-import Head from "next/head";
-// import styled from "@emotion/styled";
-import { css } from "@emotion/react";
-import { styled } from "@mui/system";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 import {
-  Character,
-  CharacterType,
-  CharacterWithPrice,
-} from "../../interfaces/dataType";
-import imageLoader from "../../imageLoader";
+  Typography,
+  Grid,
+  List,
+  ListItem,
+  Card,
+  Button,
+  styled,
+} from '@mui/material';
+import Link from 'next/link';
+import Image from 'next/image';
+import Head from 'next/head';
+// import styled from "@emotion/styled";
 
-const ProductSection = styled("div")(({ theme }) => ({
-  marginBlock: "0.5rem",
-  [theme.breakpoints.up("md")]: {},
+import { GetStaticPaths } from 'next';
+import { CharacterType, CharacterWithPrice } from '../../interfaces/dataType';
+import imageLoader from '../../imageLoader';
+
+const ProductSection = styled('div')(({ theme }) => ({
+  marginBlock: '0.5rem',
+  [theme.breakpoints.up('md')]: {},
 }));
 // const Search = styled()
-const ProductHead = styled("div")`
+const ProductHead = styled('div')`
   margin-block: 1rem;
 `;
 
@@ -39,7 +40,7 @@ export default function ProductScreen({
     <>
       <Head>
         <title>{product.name}</title>
-        {product && <meta name="description" content={product.name}></meta>}
+        {product && <meta name="description" content={product.name} />}
       </Head>
       <ProductSection>
         <ProductHead>
@@ -48,7 +49,7 @@ export default function ProductScreen({
               component="a"
               variant="h6"
               sx={{
-                "&:hover": { cursor: "pointer" },
+                '&:hover': { cursor: 'pointer' },
               }}
             >
               Back to products
@@ -112,7 +113,7 @@ export default function ProductScreen({
                     </Grid>
                     <Grid item xs={5}>
                       <Typography>
-                        {product.id > 0 ? "In Stock" : "Out of stock"}
+                        {product.id > 0 ? 'In Stock' : 'Out of stock'}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -142,15 +143,20 @@ export default function ProductScreen({
 // };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch("https://rickandmortyapi.com/api/character");
-  const { results }: CharacterType = await res.json();
-  // console.log(results);
-
+  async function api<T>(request: RequestInfo): Promise<T> {
+    const response = await fetch(request);
+    const body = (await response.json()) as Promise<T>;
+    return body;
+  }
+  const { results } = await api<CharacterType>(
+    'https://rickandmortyapi.com/api/character'
+  );
+  // newResults.forEach((topic) => {});
   return {
-    paths: results.map((character) => {
-      return { params: { slug: String(character.id) } };
-    }),
-    fallback: "blocking",
+    paths: results.map((character) => ({
+      params: { slug: String(character.id) },
+    })),
+    fallback: 'blocking',
   };
 };
 
@@ -163,11 +169,14 @@ export const getStaticProps = async ({
     `https://rickandmortyapi.com/api/character/${params.slug}`
   );
 
-  const data = await res.json();
-  const newData = { ...data, price: data.id * 100 };
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const dataa = await res.json();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const newData = { ...dataa };
 
   return {
     props: {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       product: newData,
     },
     revalidate: 3600,

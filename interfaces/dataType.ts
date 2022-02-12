@@ -1,5 +1,6 @@
-export interface DataType {
-  products: ProductType[];
+export interface Location {
+  name: string;
+  url: string;
 }
 export interface ProductType {
   name: string;
@@ -15,14 +16,26 @@ export interface ProductType {
   numReviews: number;
   description: string;
 }
-
-export interface CharacterType {
-  results: Character[];
-}
-export interface CharacterWithPrice extends Character {
-  price: number;
+export interface DataType {
+  products: ProductType[];
 }
 
+export enum Gender {
+  Female = 'Female',
+  Male = 'Male',
+  Unknown = 'unknown',
+}
+
+export enum Species {
+  Alien = 'Alien',
+  Human = 'Human',
+}
+
+export enum Status {
+  Alive = 'Alive',
+  Dead = 'Dead',
+  Unknown = 'unknown',
+}
 export interface Character {
   id: number;
   name: string;
@@ -38,24 +51,10 @@ export interface Character {
   created: Date;
 }
 
-export enum Gender {
-  Female = "Female",
-  Male = "Male",
-  Unknown = "unknown",
+export interface CharacterType {
+  results: Character[];
 }
 
-export interface Location {
-  name: string;
-  url: string;
-}
-
-export enum Species {
-  Alien = "Alien",
-  Human = "Human",
-}
-
-export enum Status {
-  Alive = "Alive",
-  Dead = "Dead",
-  Unknown = "unknown",
+export interface CharacterWithPrice extends Character {
+  price: number;
 }

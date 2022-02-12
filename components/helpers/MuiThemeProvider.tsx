@@ -1,15 +1,19 @@
-import { useTheme } from "next-themes";
-import { createTheme, GlobalStyles, responsiveFontSizes } from "@mui/material";
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { globalStyles } from "./theme";
-import React, { FC, useEffect } from "react";
-import { blue, grey, yellow } from "@mui/material/colors";
-import { breakpoints } from "@mui/system";
+import { useTheme } from 'next-themes';
+import {
+  responsiveFontSizes,
+  CssBaseline,
+  createTheme,
+  ThemeProvider,
+  GlobalStyles,
+} from '@mui/material';
+import React, { FC, useEffect } from 'react';
+import { grey, yellow } from '@mui/material/colors';
+import { globalStyles } from './theme';
 
 const MUIThemeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { resolvedTheme } = useTheme();
 
-  const [mode, setMode] = React.useState<"light" | "dark">("light");
+  const [mode, setMode] = React.useState<'light' | 'dark'>('light');
   let theme = React.useMemo(
     () =>
       createTheme({
@@ -24,16 +28,16 @@ const MUIThemeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
         },
         typography: {
           h1: {
-            fontSize: "2rem",
+            fontSize: '2rem',
           },
         },
         palette: {
           mode,
-          ...(mode === "light"
+          ...(mode === 'light'
             ? {
                 // palette values for light mode
                 primary: {
-                  main: "#102030",
+                  main: '#102030',
                 },
                 secondary: {
                   main: yellow[500],
@@ -46,7 +50,7 @@ const MUIThemeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
             : {
                 // palette values for dark mode
                 primary: {
-                  main: "#102030",
+                  main: '#102030',
                 },
                 secondary: {
                   main: yellow[500],
@@ -66,7 +70,12 @@ const MUIThemeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   theme = responsiveFontSizes(theme);
 
   useEffect(() => {
-    resolvedTheme === "light" ? setMode("light") : setMode("dark");
+    // resolvedTheme === "light" ? setMode(  "light") : setMode("dark"); //! Eslint gives error
+    if (resolvedTheme === 'light') {
+      setMode('light');
+    } else {
+      setMode('dark');
+    }
   }, [resolvedTheme]);
 
   return (

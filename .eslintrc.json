@@ -1,8 +1,13 @@
 {
-  "env": {"browser": true, "node": true},
-  "extends": ["next/core-web-vitals"],
+  "extends": ["wesbos/typescript","next/core-web-vitals"],
   "rules": {
+    "prettier/prettier": "error",
     "react/no-unescaped-entities": "off",
-    "@next/next/no-page-custom-font": "off"
+    "@next/next/no-page-custom-font": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"]
   }
+  // "plugins": [
+  //   "prettier"
+  // ]
 }
