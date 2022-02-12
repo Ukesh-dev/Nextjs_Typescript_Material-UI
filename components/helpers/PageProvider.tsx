@@ -1,8 +1,7 @@
 // import * as React from "react";
 // import { useTheme } from "next-themes";
-import { ReactElement, ReactNode } from "react";
-import { ThemeProvider as PreferredTheme } from "next-themes";
-import { CacheProvider, EmotionCache } from "@emotion/react";
+import { ThemeProvider as PreferredTheme } from 'next-themes';
+import { CacheProvider, EmotionCache } from '@emotion/react';
 // import {
 //   ThemeProvider,
 //   CssBaseline,
@@ -11,9 +10,10 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 // } from "@mui/material";
 // import { getDesignTokens, theme } from "../theme";
 
-import createEmotionCache from "../../utils/createEmotionCache";
+import createEmotionCache from '../../utils/createEmotionCache';
 // import lightThemeOptions from '../styles/theme/lightThemeOptions';
-import MUIThemeProvider from "./MuiThemeProvider";
+import MUIThemeProvider from './MuiThemeProvider';
+
 interface PageProviderProps {
   emotionCache?: EmotionCache;
   children: React.ReactNode;

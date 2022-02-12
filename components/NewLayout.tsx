@@ -1,6 +1,7 @@
-import { Container } from "@mui/material";
-import { ReactNode } from "react";
-import { useGlobalContext } from "../context";
+import { Container } from '@mui/material';
+import { ReactNode } from 'react';
+import { useGlobalContext } from '../context';
+
 const NewLayout = ({ children }: { children: ReactNode }) => {
   const { state } = useGlobalContext();
   console.log(state);

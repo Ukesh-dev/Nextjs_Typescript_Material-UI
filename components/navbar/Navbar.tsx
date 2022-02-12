@@ -1,33 +1,25 @@
-import {
-  AppBar,
-  Typography,
-  Toolbar,
-  Box,
-  Container,
-  Button,
-} from "@mui/material";
+import { AppBar, Typography, Box, Container, Button } from '@mui/material';
 // import styled from "@emotion/styled";
-import { ButtonGroup } from "./NavbarStyles";
-import LoginIcon from "@mui/icons-material/Login";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { css } from "@emotion/react";
-import { styled } from "@mui/material";
+// import { ButtonGroup } from './NavbarStyles';
+import LoginIcon from '@mui/icons-material/Login';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { css } from '@emotion/react';
 // import styled from "@emotion/styled";
 // import Typography from '@mui/material/Typography';
-import { red, green, blue } from "@mui/material/colors";
+// import { red, green, blue } from '@mui/material/colors';
 
-const Root = styled("div")(({ theme }) => ({
-  padding: theme.spacing(1),
-  [theme.breakpoints.down("md")]: {
-    backgroundColor: red[500],
-  },
-  [theme.breakpoints.up("md")]: {
-    backgroundColor: blue[500],
-  },
-  [theme.breakpoints.up("lg")]: {
-    backgroundColor: green[500],
-  },
-}));
+// const Root = styled('div')(({ theme }) => ({
+//   padding: theme.spacing(1),
+//   [theme.breakpoints.down('md')]: {
+//     backgroundColor: red[500],
+//   },
+//   [theme.breakpoints.up('md')]: {
+//     backgroundColor: blue[500],
+//   },
+//   [theme.breakpoints.up('lg')]: {
+//     backgroundColor: green[500],
+//   },
+// }));
 
 // const appBarr = css`
 //   background-color: var(--foreground);
@@ -40,37 +32,37 @@ const Root = styled("div")(({ theme }) => ({
 //   aspect-ratio: 1;
 // `;
 
-import Link from "next/link";
-import ThemeUpdater from "../ThemeUpdater";
-import { flexbox } from "@mui/system";
-import { useGlobalContext } from "../../context";
+import Link from 'next/link';
+import ThemeUpdater from '../ThemeUpdater';
+// import { flexbox } from '@mui/system';
+import { useGlobalContext } from '../../context';
 // import useStyles from "../../utils/styles";
 // import { Button } from "./NavbarStyles";
-const AppBarrr = styled;
+// const AppBarrr = styled;
 const Navbar = () => {
   const { state, dispatch } = useGlobalContext();
   const handleClick = () => {
     if (state.darkmode === true) {
-      dispatch({ type: "TEST" });
+      dispatch({ type: 'TEST' });
     }
   };
   return (
     <AppBar
       position="static"
       sx={{
-        bgcolor: "primary.main",
+        bgcolor: 'primary.main',
         padding: 0,
-        backgroundImage: "none",
+        backgroundImage: 'none',
       }}
     >
       <Container>
         <Box
           sx={{
-            display: "flex",
-            width: "100%",
-            minHeight: "64px",
-            justifyContent: "space-between",
-            alignItems: "center",
+            display: 'flex',
+            width: '100%',
+            minHeight: '64px',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
         >
           {/* <Toolbar
@@ -79,38 +71,38 @@ const Navbar = () => {
             paddingLeft: "100px",
           }}
         > */}
-          <Link href="/">
+          <Link href="/" passHref>
             <Typography
               variant="h4"
               component="a"
               sx={{
-                fontSize: "2rem",
-                cursor: "pointer",
-                fontWeight: "bold",
-                letterSpacing: "0.1rem",
+                fontSize: '2rem',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                letterSpacing: '0.1rem',
               }}
             >
               Amazona
             </Typography>
           </Link>
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <ThemeUpdater />
             <Button
-              sx={{ fontSize: "1rem", textTransform: "none", color: "#fff" }}
+              sx={{ fontSize: '1rem', textTransform: 'none', color: '#fff' }}
               startIcon={<ShoppingCartOutlinedIcon />}
             >
-              <Link href="/cart">
+              <Link href="/cart" passHref>
                 <Typography
                   // variant="subtitle1"
                   component="a"
                   sx={{
                     color: {
-                      xs: "green",
-                      sm: "red",
+                      xs: 'green',
+                      sm: 'red',
                     },
                   }}
                   css={css`
-                    @media and screen (min-width: 500px) {
+                    @media (min-width: 500px) {
                       font-size: 10rem;
                       color: green;
                     }
@@ -124,10 +116,10 @@ const Navbar = () => {
               onClick={handleClick}
               color="secondary"
               sx={{
-                fontSize: "1rem",
-                textTransform: "none",
-                display: { xs: "none", md: "flex" },
-                color: "#fff",
+                fontSize: '1rem',
+                textTransform: 'none',
+                display: { xs: 'none', md: 'flex' },
+                color: '#fff',
               }}
               startIcon={<LoginIcon />}
             >
