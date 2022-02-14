@@ -1,6 +1,7 @@
 import { createTheme, PaletteMode } from '@mui/material';
 import { css } from '@emotion/react';
-import { amber, deepOrange, green, grey, red } from '@mui/material/colors';
+// import { amber, deepOrange, green, grey, red } from '@mui/material/colors';
+import { green } from '@mui/material/colors';
 // import { PaletteOptions} from "@mui/material";
 // export type AllowedTheme = NonNullable<PaletteOptions["mode"]>;
 // export const DEFAULT_THEME : AllowedTheme = "dark"
@@ -77,10 +78,12 @@ export const globalStyles = css`
     --background: #fff;
     --foreground: black;
     --navbg: #102030;
+    --cardbg: #fff;
   }
   [data-theme='dark'] {
     --background: #000;
     --navbg: #102030;
+    --cardbg: #121212;
     --foreground: blackbody {
 
     }

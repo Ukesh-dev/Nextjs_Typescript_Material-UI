@@ -10,10 +10,15 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import Head from 'next/head';
+import { GetStaticPaths } from 'next';
+import { useGlobalContext } from '../../context';
 // import styled from "@emotion/styled";
 
-import { GetStaticPaths } from 'next';
-import { CharacterType, CharacterWithPrice } from '../../interfaces/dataType';
+import {
+  Character,
+  CharacterType,
+  CharacterWithPrice,
+} from '../../interfaces/dataType';
 import imageLoader from '../../imageLoader';
 
 const ProductSection = styled('div')(({ theme }) => ({
@@ -30,6 +35,19 @@ export default function ProductScreen({
 }: {
   product: CharacterWithPrice;
 }) {
+  const { dispatch } = useGlobalContext();
+
+  const addToCart = async () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const data: CharacterWithPrice = await fetch(
+      `https://rickandmortyapi.com/api/character/${product.id}`
+    ).then((res) => res.json());
+    const price = data.id * 100;
+    dispatch({
+      type: 'CART_ADD_ITEM',
+      payload: { ...data, quantity: 1, price },
+    });
+  };
   // const router = useRouter();
   // const { slug } = router.query;
   // const product = data.products.find((a) => a.slug == slug);
@@ -119,9 +137,25 @@ export default function ProductScreen({
                   </Grid>
                 </ListItem>
                 <ListItem>
-                  <Button fullWidth variant="contained" color="secondary">
-                    Add to Cart
-                  </Button>
+                  {product.id <= 0 ? (
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="secondary"
+                      disabled
+                    >
+                      Add to Cart
+                    </Button>
+                  ) : (
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => addToCart()}
+                    >
+                      Add to Cart
+                    </Button>
+                  )}
                 </ListItem>
               </List>
             </Card>
@@ -165,14 +199,28 @@ export const getStaticProps = async ({
 }: {
   params: { slug: string };
 }) => {
-  const res = await fetch(
+  async function api<T>(url: string): Promise<T> {
+    return fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          console.log('There is an error');
+          throw new Error(response.statusText);
+        }
+        return response.json() as Promise<T>;
+        // return response.json();
+      })
+      .then((datas) => datas);
+  }
+  const dataa = await api<Character>(
     `https://rickandmortyapi.com/api/character/${params.slug}`
   );
+  const price = dataa.id;
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const dataa = await res.json();
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const newData = { ...dataa };
+  const newData: CharacterWithPrice = {
+    ...dataa,
+    price: price * 100,
+    quantity: 0,
+  };
 
   return {
     props: {

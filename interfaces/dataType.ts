@@ -57,4 +57,5 @@ export interface CharacterType {
 
 export interface CharacterWithPrice extends Character {
   price: number;
+  quantity: number;
 }

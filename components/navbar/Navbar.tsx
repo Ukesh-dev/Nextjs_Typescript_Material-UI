@@ -1,4 +1,11 @@
-import { AppBar, Typography, Box, Container, Button } from '@mui/material';
+import {
+  AppBar,
+  Typography,
+  Box,
+  Container,
+  Button,
+  Badge,
+} from '@mui/material';
 // import styled from "@emotion/styled";
 // import { ButtonGroup } from './NavbarStyles';
 import LoginIcon from '@mui/icons-material/Login';
@@ -41,6 +48,7 @@ import { useGlobalContext } from '../../context';
 // const AppBarrr = styled;
 const Navbar = () => {
   const { state, dispatch } = useGlobalContext();
+  const { cart } = state;
   const handleClick = () => {
     if (state.darkmode === true) {
       dispatch({ type: 'TEST' });
@@ -88,28 +96,55 @@ const Navbar = () => {
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <ThemeUpdater />
             <Button
-              sx={{ fontSize: '1rem', textTransform: 'none', color: '#fff' }}
+              sx={{
+                fontSize: '1rem',
+                textTransform: 'none',
+                color: '#fff',
+              }}
               startIcon={<ShoppingCartOutlinedIcon />}
             >
               <Link href="/cart" passHref>
-                <Typography
-                  // variant="subtitle1"
-                  component="a"
-                  sx={{
-                    color: {
-                      xs: 'green',
-                      sm: 'red',
-                    },
-                  }}
-                  css={css`
-                    @media (min-width: 500px) {
-                      font-size: 10rem;
-                      color: green;
-                    }
-                  `}
-                >
-                  Cart
-                </Typography>
+                {cart.length > 0 ? (
+                  <Badge badgeContent={cart.length}>
+                    <Typography
+                      // variant="subtitle1"
+                      component="a"
+                      // sx={{
+                      //   color: {
+                      //     xs: 'green',
+                      //     sm: 'red',
+                      //   },
+                      // }}
+                      css={css`
+                        @media (max-width: 700px) {
+                          font-size: 10rem;
+                          color: green;
+                        }
+                      `}
+                    >
+                      Cart
+                    </Typography>
+                  </Badge>
+                ) : (
+                  <Typography
+                    // variant="subtitle1"
+                    component="a"
+                    // sx={{
+                    //   color: {
+                    //     xs: 'green',
+                    //     sm: 'red',
+                    //   },
+                    // }}
+                    css={css`
+                      @media (max-width: 700px) {
+                        font-size: 10rem;
+                        color: green;
+                      }
+                    `}
+                  >
+                    Cart
+                  </Typography>
+                )}
               </Link>
             </Button>
             <Button

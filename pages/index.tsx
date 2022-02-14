@@ -28,11 +28,12 @@ function Home({
 }) {
   // console.log(character);
   // console.log(products);
-  const newCharacter = character.map((item) => ({
-    ...item,
-    price: Math.ceil(8 * Math.random()) * 100,
-  }));
+  // const newCharacter: CharacterWithPrice[]= character.map((item) => ({
+  //   ...item,
+  //   price: Math.ceil(8 * Math.random()) * 100,
+  // }));
   //! Only Efficient for small amount of arrays
+  const newCharacter = character;
   // const newCharacter = character
   //   .map((value) => ({ value, sort: Math.random() }))
   //   .sort(
@@ -114,31 +115,27 @@ export const getStaticProps: GetStaticProps = async () => {
   const { results } = await api<CharacterType>(
     'https://rickandmortyapi.com/api/character'
   );
-  const shuffle: <T>(array: T[] | void) => T[] | void = (array) => {
-    if (array) {
-      let currentIndex: number = array.length;
-      let randomIndex: number;
-      while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        [array[currentIndex], array[randomIndex]] = [
-          array[randomIndex],
-          array[currentIndex],
-        ];
-      }
-
-      return array;
+  const shuffle: <T>(array: T[]) => T[] = (array) => {
+    let currentIndex: number = array.length;
+    let randomIndex: number;
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
     }
+    return array;
   };
-  const newCharacter = shuffle(results);
+  const characterWithPrice = results.map((character) => ({
+    ...character,
+    price: character.id * 100,
+    quantity: 0,
+  }));
+  const newCharacter = shuffle<CharacterWithPrice>(characterWithPrice);
 
   // ! Can't do this after the fetch as it says unsafe assingment;;;
-  // const charactersWithPrice: Character[] = newResults.map(
-  //   (character: Character) => ({
-  //     ...character,
-  //     price: 100 * character.id,
-  //   })
-  // );
   const { products } = data;
 
   return {

@@ -23,6 +23,13 @@ const ImageWrapper = styled.div`
   width: '100%';
   aspect-ratio: 1;
 `;
+// const item = {
+//   countInStock: 100,
+// };
+
+// console.log([...Array(item.countInStock).keys()].map((x: number) => x + 1));
+// console.log(Array.from(Array(item.countInStock).keys()).map((x) => x + 1));
+// console.log(Array.from(Array(item.countInStock).keys()).map((x) => x + 1));
 
 const GridItem = ({ products }: { products: CharacterWithPrice }) => (
   // const classes = useStyles();
@@ -34,7 +41,11 @@ const GridItem = ({ products }: { products: CharacterWithPrice }) => (
     lg={3}
     // className={classes.navbar}
   >
-    <Card variant="outlined" aria-label="options">
+    <Card
+      variant="outlined"
+      aria-label="options"
+      sx={{ backgroundColor: 'var(--cardbg)' }}
+    >
       <Link href={`/product/${products.id}`} passHref>
         <CardActionArea>
           {/* <div   //! Need to fix using pragma orElse it shows [object object] error 

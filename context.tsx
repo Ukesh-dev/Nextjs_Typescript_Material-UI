@@ -1,9 +1,16 @@
-import { createTheme } from "@mui/material";
-import React, { createContext, useContext, ReactNode, useReducer } from "react";
-import { ActionType, initialState, initialStateType, reducer } from "./reducer";
+// import { createTheme } from '@mui/material';
+import React, {
+  createContext,
+  useContext,
+  ReactNode,
+  useReducer,
+  useMemo,
+  useEffect,
+} from 'react';
+import { ActionType, initialState, InitialStateType, reducer } from './reducer';
 
 const AppContext = createContext<{
-  state: initialStateType;
+  state: InitialStateType;
   dispatch: React.Dispatch<ActionType>;
 }>({
   state: initialState,
@@ -20,13 +27,14 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   //  [mode],
   //  )
   const [state, dispatch] = useReducer(reducer, initialState);
-  return (
-    <AppContext.Provider value={{ state, dispatch }}>
-      {children}
-    </AppContext.Provider>
-  );
+  const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    state.cart = localStorage.getItem('cartItem')
+      ? JSON.parse(localStorage.getItem('cartItem') || '')
+      : [];
+  }, []);
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
-export const useGlobalContext = () => {
-  return useContext(AppContext);
-};
+export const useGlobalContext = () => useContext(AppContext);
