@@ -29,7 +29,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem('cartItems') || '')) {
+    if (localStorage.getItem('cartItems')) {
       dispatch({
         type: 'LOCAL',
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

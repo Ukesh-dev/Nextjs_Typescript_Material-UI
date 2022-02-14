@@ -1,7 +1,6 @@
 // import { Character } from './interfaces/dataType';
 
 // import { PlaylistAddOutlined } from '@mui/icons-material';
-import Cookies from 'js-cookie';
 import { CharacterWithPrice } from './interfaces/dataType';
 
 // export interface CartItemType extends Character{
@@ -43,7 +42,7 @@ export const reducer = (state: InitialStateType, action: ActionType) => {
       const iitem = state.cart.filter(
         (cartItem) => cartItem.id !== action.payload
       );
-      Cookies.set('cartItems', JSON.stringify(iitem));
+      localStorage.setItem('cartItems', JSON.stringify('iitem'));
       return {
         ...state,
         cart: iitem,
