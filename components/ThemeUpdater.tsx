@@ -29,8 +29,6 @@ const ThemeUpdater: FC = () => {
   //   }
   // }, [resolvedTheme]);
   useEffect(() => {
-    // () => loadCurrentTheme();
-    console.log('in the useEffect');
     if (
       window.matchMedia('(prefers-color-shceme:dark') ||
       resolvedTheme === 'dark'

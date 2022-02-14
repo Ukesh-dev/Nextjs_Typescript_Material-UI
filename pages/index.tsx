@@ -3,14 +3,12 @@ import { styled, Grid, Typography } from '@mui/material';
 import type { GetStaticProps } from 'next';
 // import { styled } from '@mui/material';
 import Layout from '../components/Layout';
-import { data } from '../data';
 import {
   CharacterType,
   CharacterWithPrice,
   // ProductType,
 } from '../interfaces/dataType';
 import GridItem from '../components/products/GridItem';
-import { useGlobalContext } from '../context';
 // import { css } from "@emotion/react";
 // import ThemeUpdater from "../components/ThemeUpdater";
 // import styled from "@emotion/styled";
@@ -27,12 +25,6 @@ function Home({
   // products: ProductType[];
   character: CharacterWithPrice[];
 }) {
-  const {
-    state: { cart },
-  } = useGlobalContext();
-  console.log(cart);
-  // console.log(character);
-  // console.log(products);
   // const newCharacter: CharacterWithPrice[]= character.map((item) => ({
   //   ...item,
   //   price: Math.ceil(8 * Math.random()) * 100,
@@ -46,11 +38,9 @@ function Home({
   //   .map((value) => ({ value, sort: Math.random() }))
   //   .sort(
   //     (a, b) =>
-  //       // console.log(a, b);
   //       a.sort - b.sort
   //   )
   //   .map(({ value }) => value);
-  // console.log(shuffled);
   //!------------------------
   // most effiecient
   // const shuffle: <T>(array: T[]) => T[] = (array) => {
@@ -97,7 +87,6 @@ export const getStaticProps: GetStaticProps = async () => {
   // const db = client.db();
   // const productsCollection = db.collection("products");
   // const productsMongo = await productsCollection.find().toArray();
-  // console.log(productsMongo);
   // client.close();
   //! Need to make a async or fetch wrapper
   // ! const res = await fetch('https://rickandmortyapi.com/api/character');
@@ -144,11 +133,10 @@ export const getStaticProps: GetStaticProps = async () => {
   const newCharacter = shuffle<CharacterWithPrice>(characterWithPrice);
 
   // ! Can't do this after the fetch as it says unsafe assingment;;;
-  const { products } = data;
+  // const { products } = data;
 
   return {
     props: {
-      products,
       // characters: newResults.map((character) => ({
       //   ...character,
       //   price: 100 * character.id,

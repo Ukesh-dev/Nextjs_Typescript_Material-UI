@@ -1,17 +1,10 @@
 import dynamic from 'next/dynamic';
-import {
-  AppBar,
-  Typography,
-  Box,
-  Container,
-  Button,
-  Badge,
-} from '@mui/material';
+import { AppBar, Typography, Box, Container, Button } from '@mui/material';
 // import styled from "@emotion/styled";
 // import { ButtonGroup } from './NavbarStyles';
 import LoginIcon from '@mui/icons-material/Login';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import { css } from '@emotion/react';
+// import { css } from '@emotion/react';
 // import styled from "@emotion/styled";
 // import Typography from '@mui/material/Typography';
 // import { red, green, blue } from '@mui/material/colors';
@@ -44,7 +37,7 @@ import Link from 'next/link';
 import ThemeUpdater from '../ThemeUpdater';
 // import { flexbox } from '@mui/system';
 import { useGlobalContext } from '../../context';
-import NewLayout from '../NewLayout';
+// import NewLayout from '../NewLayout';
 // import useStyles from "../../utils/styles";
 // import { Button } from "./NavbarStyles";
 // const AppBarrr = styled;
@@ -55,7 +48,6 @@ const DynamicComponent = dynamic(() => import('../../components/CartBadge'), {
 
 const Navbar = () => {
   const { state, dispatch } = useGlobalContext();
-  const { cart } = state;
   const handleClick = () => {
     if (state.darkmode === true) {
       dispatch({ type: 'TEST' });

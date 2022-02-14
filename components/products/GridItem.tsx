@@ -64,8 +64,9 @@ const GridItem = ({ products }: { products: CharacterWithPrice }) => (
             > */}
             <Image
               loader={imageLoader}
-              unoptimized
               layout="fill"
+              priority
+              unoptimized
               alt={products.name}
               src={products.image}
               objectFit="cover"
