@@ -205,14 +205,15 @@ export const getStaticProps = async ({
 }) => {
   async function api<T>(url: string): Promise<T> {
     return fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          console.log('There is an error');
-          throw new Error(response.statusText);
-        }
-        return response.json() as Promise<T>;
+      .then(
+        (response) =>
+          // if (!response.ok) {
+          //   console.log('There is an error');
+          //   throw new Error(response.statusText);
+          // }
+          response.json() as Promise<T>
         // return response.json();
-      })
+      )
       .then((datas) => datas);
   }
   const dataa = await api<Character>(
