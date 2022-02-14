@@ -10,6 +10,7 @@ import {
   // ProductType,
 } from '../interfaces/dataType';
 import GridItem from '../components/products/GridItem';
+import { useGlobalContext } from '../context';
 // import { css } from "@emotion/react";
 // import ThemeUpdater from "../components/ThemeUpdater";
 // import styled from "@emotion/styled";
@@ -26,12 +27,19 @@ function Home({
   // products: ProductType[];
   character: CharacterWithPrice[];
 }) {
+  const {
+    state: { cart },
+  } = useGlobalContext();
+  console.log(cart);
   // console.log(character);
   // console.log(products);
   // const newCharacter: CharacterWithPrice[]= character.map((item) => ({
   //   ...item,
   //   price: Math.ceil(8 * Math.random()) * 100,
   // }));
+  // if(type of window !== 'undefined'){
+  //   localStorage.getItem('cartItems')
+  // }
   //! Only Efficient for small amount of arrays
   const newCharacter = character;
   // const newCharacter = character

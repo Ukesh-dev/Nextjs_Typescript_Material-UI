@@ -4,7 +4,6 @@ import Navbar from './navbar/Navbar';
 // import useStyles from '../utils/styles';
 
 const Layout = ({ children }: { children: React.ReactNode }) => (
-  // const classes = useStyles(); //! Passing as Props
   // const { navbar } = useStyles(); //! Passing as Object
   <>
     <Head>

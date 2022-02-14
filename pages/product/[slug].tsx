@@ -35,7 +35,11 @@ export default function ProductScreen({
 }: {
   product: CharacterWithPrice;
 }) {
-  const { dispatch } = useGlobalContext();
+  const {
+    state: { cart },
+    dispatch,
+  } = useGlobalContext();
+  console.log(cart);
 
   const addToCart = async () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

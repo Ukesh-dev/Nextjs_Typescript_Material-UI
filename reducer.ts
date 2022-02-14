@@ -1,5 +1,6 @@
 // import { Character } from './interfaces/dataType';
 
+// import { PlaylistAddOutlined } from '@mui/icons-material';
 import Cookies from 'js-cookie';
 import { CharacterWithPrice } from './interfaces/dataType';
 
@@ -13,13 +14,15 @@ export type InitialStateType = {
 export const initialState: InitialStateType = {
   darkmode: false,
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  cart: Cookies.get('cartItems')
-    ? JSON.parse(Cookies.get('cartItems') || '')
-    : [],
+  // cart: Cookies.get('cartItems')
+  //   ? JSON.parse(Cookies.get('cartItems') || '')
+  //   : [],
+  cart: [],
 };
 export type ActionType =
   | { type: 'DARKMODE_ON' }
   | { type: 'DARKMODE_OFF' }
+  | { type: 'LOCAL'; payload: CharacterWithPrice[] }
   | { type: 'TEST' }
   | { type: 'CLEAR_CART' }
   | { type: 'REMOVE'; payload: number }
@@ -36,11 +39,16 @@ export const reducer = (state: InitialStateType, action: ActionType) => {
       return state;
     case 'CLEAR_CART':
       return { ...state, cart: [] };
-    case 'REMOVE':
+    case 'REMOVE': {
+      const iitem = state.cart.filter(
+        (cartItem) => cartItem.id !== action.payload
+      );
+      Cookies.set('cartItems', JSON.stringify(iitem));
       return {
         ...state,
-        cart: state.cart.filter((cartItem) => cartItem.id !== action.payload),
+        cart: iitem,
       };
+    }
     case 'CART_ADD_ITEM': {
       const newItem = action.payload;
       const existItem = state.cart.find((item) => item.name === newItem.name);
@@ -49,13 +57,20 @@ export const reducer = (state: InitialStateType, action: ActionType) => {
             item.name === existItem.name ? newItem : item
           )
         : [...state.cart, newItem];
-      Cookies.set('cartItems', JSON.stringify(cartItems));
+      console.log(cartItems);
+      // Cookies.set('cartItems', JSON.stringify(cartItems));
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      // const addedCOkkies = JSON.parse(Cookies.get('cartItems') || '');
+      // console.log(addedCOkkies);
 
       return {
         ...state,
         cart: cartItems,
       };
     }
+    case 'LOCAL':
+      return { ...state, cart: action.payload };
     default:
       return state;
   }

@@ -27,13 +27,27 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   //  [mode],
   //  )
   const [state, dispatch] = useReducer(reducer, initialState);
-  const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
+
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    state.cart = localStorage.getItem('cartItem')
-      ? JSON.parse(localStorage.getItem('cartItem') || '')
-      : [];
+    if (JSON.parse(localStorage.getItem('cartItems') || '')) {
+      dispatch({
+        type: 'LOCAL',
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        payload: JSON.parse(localStorage.getItem('cartItems') || ''),
+      });
+    }
   }, []);
+  // useEffect(() => {
+  //   if(state !== ini)
+  // })
+
+  const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);
+  // useEffect(() => {
+  //   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  //   state.cart = localStorage.getItem('cartItem')
+  //     ? JSON.parse(localStorage.getItem('cartItem') || '')
+  //     : [];
+  // }, []);
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 

@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import {
   AppBar,
   Typography,
@@ -43,9 +44,15 @@ import Link from 'next/link';
 import ThemeUpdater from '../ThemeUpdater';
 // import { flexbox } from '@mui/system';
 import { useGlobalContext } from '../../context';
+import NewLayout from '../NewLayout';
 // import useStyles from "../../utils/styles";
 // import { Button } from "./NavbarStyles";
 // const AppBarrr = styled;
+// eslint-disable-next-line import/no-useless-path-segments
+const DynamicComponent = dynamic(() => import('../../components/CartBadge'), {
+  ssr: false,
+});
+
 const Navbar = () => {
   const { state, dispatch } = useGlobalContext();
   const { cart } = state;
@@ -104,47 +111,11 @@ const Navbar = () => {
               startIcon={<ShoppingCartOutlinedIcon />}
             >
               <Link href="/cart" passHref>
-                {cart.length > 0 ? (
-                  <Badge badgeContent={cart.length}>
-                    <Typography
-                      // variant="subtitle1"
-                      component="a"
-                      // sx={{
-                      //   color: {
-                      //     xs: 'green',
-                      //     sm: 'red',
-                      //   },
-                      // }}
-                      css={css`
-                        @media (max-width: 700px) {
-                          font-size: 10rem;
-                          color: green;
-                        }
-                      `}
-                    >
-                      Cart
-                    </Typography>
-                  </Badge>
-                ) : (
-                  <Typography
-                    // variant="subtitle1"
-                    component="a"
-                    // sx={{
-                    //   color: {
-                    //     xs: 'green',
-                    //     sm: 'red',
-                    //   },
-                    // }}
-                    css={css`
-                      @media (max-width: 700px) {
-                        font-size: 10rem;
-                        color: green;
-                      }
-                    `}
-                  >
-                    Cart
-                  </Typography>
-                )}
+                {/* {cart.length > 0 ? <Badge badgeContent={cart.length} /> : 'Cart'} */}
+                <Typography>
+                  Cart
+                  <DynamicComponent />
+                </Typography>
               </Link>
             </Button>
             <Button
@@ -172,4 +143,9 @@ const Navbar = () => {
   );
 };
 
+// Navbar.getLayout = function getLayout(page: typeof Navbar) {
+//   return <NewLayout>{page}</NewLayout>;
+// };
+
+// export default dynamic(() => Promise.resolve(Navbar), { ssr: false });
 export default Navbar;

@@ -1,10 +1,16 @@
+import Head from 'next/head';
 import { Container } from '@mui/material';
-import { ReactNode } from 'react';
+// import Navbar from './navbar/Navbar';
+// import useStyles from '../utils/styles';
 
-const NewLayout = ({ children }: { children: ReactNode }) => (
-  <div>
-    <h2>Navbar</h2>
+const Layout = ({ children }: { children: React.ReactNode }) => (
+  // const { navbar } = useStyles(); //! Passing as Object
+  <>
+    <Head>
+      <title>Next Amazon</title>
+    </Head>
+    {/* <Navbar /> */}
     <Container>{children}</Container>
-  </div>
+  </>
 );
-export default NewLayout;
+export default Layout;
