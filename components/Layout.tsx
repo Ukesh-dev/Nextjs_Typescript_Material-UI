@@ -7,6 +7,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => (
   // const { navbar } = useStyles(); //! Passing as Object
   <>
     <Head>
+      <link rel="preload" crossOrigin="anonymous" />
       <title>Next Amazon</title>
     </Head>
     <Navbar />

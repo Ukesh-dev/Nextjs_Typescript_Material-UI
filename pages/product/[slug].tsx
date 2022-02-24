@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import {
   Typography,
   Grid,
@@ -39,18 +40,23 @@ export default function ProductScreen({
     state: { cart },
     dispatch,
   } = useGlobalContext();
-  console.log(cart);
+  // console.log(cart);
+  const inCart = cart.find((item) => item.id === product.id);
 
+  const router = useRouter();
   const addToCart = async () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data: CharacterWithPrice = await fetch(
       `https://rickandmortyapi.com/api/character/${product.id}`
     ).then((res) => res.json());
+    const existItem = cart.find((item) => item.id === product.id);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
     const price = data.id * 100;
     dispatch({
       type: 'CART_ADD_ITEM',
-      payload: { ...data, quantity: 1, price },
+      payload: { ...data, quantity, price },
     });
+    router.push('/cart');
   };
   // const router = useRouter();
   // const { slug } = router.query;
@@ -141,14 +147,15 @@ export default function ProductScreen({
                   </Grid>
                 </ListItem>
                 <ListItem>
-                  {product.id <= 0 ? (
+                  {product.id <= 0 || inCart ? (
                     <Button
                       fullWidth
                       variant="contained"
                       color="secondary"
-                      disabled
+                      // disabled={!!inCart}
+                      sx={{ '&:hover': { cursor: 'not-allowed' } }}
                     >
-                      Add to Cart
+                      {product.id <= 0 ? 'Out of Stock' : 'In Cart'}
                     </Button>
                   ) : (
                     <Button
@@ -203,18 +210,20 @@ export const getStaticProps = async ({
 }: {
   params: { slug: string };
 }) => {
-  async function api<T>(url: string): Promise<T> {
-    return fetch(url)
-      .then(
-        (response) =>
-          // if (!response.ok) {
-          //   console.log('There is an error');
-          //   throw new Error(response.statusText);
-          // }
-          response.json() as Promise<T>
-        // return response.json();
-      )
-      .then((datas) => datas);
+  async function api<T>(url: RequestInfo): Promise<T> {
+    // return fetch(url)
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       console.log('There is an error');
+    //       throw new Error(response.statusText);
+    //     }
+    //     return response.json() as Promise<T>;
+    //     // return response.json();
+    //   })
+    //   .then((datas) => datas);
+    const res = await fetch(url);
+    const data = (await res.json()) as Promise<T>;
+    return data;
   }
   const dataa = await api<Character>(
     `https://rickandmortyapi.com/api/character/${params.slug}`
@@ -226,6 +235,13 @@ export const getStaticProps = async ({
     price: price * 100,
     quantity: 0,
   };
+
+  // async function callGraph<T>(url: string) {
+  //   const response = await fetch(url);
+  //   const data = response.json() as Promise<T>;
+
+  //   return data;
+  // }
 
   return {
     props: {

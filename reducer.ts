@@ -42,7 +42,7 @@ export const reducer = (state: InitialStateType, action: ActionType) => {
       const iitem = state.cart.filter(
         (cartItem) => cartItem.id !== action.payload
       );
-      localStorage.setItem('cartItems', JSON.stringify('iitem'));
+      localStorage.setItem('cartItems', JSON.stringify(iitem));
       return {
         ...state,
         cart: iitem,

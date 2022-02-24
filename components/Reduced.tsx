@@ -18,21 +18,39 @@ import {
 } from '@mui/material';
 // import Layout from '../components/Layout';
 import { useGlobalContext } from '../context';
-import { Character } from '../interfaces/dataType';
+import { Character, CharacterWithPrice } from '../interfaces/dataType';
 import imageLoader from '../imageLoader';
 // import NewLayout from '../components/NewLayout';
 
 const Reduced = () => {
-  const value = useGlobalContext();
-  const { state, dispatch } = value;
-  const { cart, darkmode } = state;
-  console.log(darkmode);
+  const { state, dispatch } = useGlobalContext();
+  const { cart } = state;
+  // console.log(darkmode);
 
   const removeItemHandler = (item: Character) => {
     dispatch({ type: 'REMOVE', payload: item.id });
   };
-  const updateCartHandler = () => {
-    console.log('nepal');
+  const updateCartHandler = async (
+    item: Character,
+    productQuantity: string | number
+  ) => {
+    const res = await fetch(
+      `https://rickandmortyapi.com/api/character/${item.id}`
+    );
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const data: CharacterWithPrice = await res.json();
+    const newQuantity: number =
+      typeof productQuantity === 'string'
+        ? parseInt(productQuantity)
+        : productQuantity;
+
+    // const newQuantity = Number(quantity);
+    console.log(typeof newQuantity);
+
+    dispatch({
+      type: 'CART_ADD_ITEM',
+      payload: { ...data, quantity: newQuantity, price: item.id * 100 },
+    });
   };
   return (
     <>
@@ -47,7 +65,7 @@ const Reduced = () => {
               <Table>
                 <TableHead>
                   <TableRow>
-                    {console.log(cart)}
+                    {/* {console.log(cart)} */}
                     <TableCell>Image</TableCell>
                     <TableCell>Name</TableCell>
                     <TableCell align="right">Quantity</TableCell>
@@ -79,7 +97,9 @@ const Reduced = () => {
                       <TableCell align="right">
                         <Select
                           value={item.quantity}
-                          onChange={() => updateCartHandler()}
+                          onChange={(e) =>
+                            updateCartHandler(item, e.target.value)
+                          }
                         >
                           {Array.from({ length: 20 }, (_, index) => (
                             <MenuItem key={index + 1} value={index + 1}>
@@ -110,7 +130,11 @@ const Reduced = () => {
                 <ListItem>
                   <Typography variant="h2">
                     Subtotal ({cart.reduce((a, c) => a + c.quantity, 0)} items)
-                    : ${cart.reduce((a, c) => a + c.quantity * c.price, 0)}
+                    : $
+                    {cart.reduce(
+                      (a, c: CharacterWithPrice) => a + c.quantity * c.price,
+                      0
+                    )}
                   </Typography>
                 </ListItem>
                 <ListItem>
